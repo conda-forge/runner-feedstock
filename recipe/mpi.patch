@@ -26,7 +26,7 @@ index 315db85..09c473d 100644
 -FFLAGS        = -O3
 +# CC = gcc
 +# CFLAGS =
-+LIB           = ${LDFLAGS} -llapack -lblas
++LIB           = ${LDFLAGS} -llapack -lblas -fopenmp
 +# FFLAGS        = -O3
  
  ### GWDG
