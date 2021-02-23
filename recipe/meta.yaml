@@ -34,7 +34,6 @@ requirements:
 test:
   commands:
     - RuNNer.serial.x
-    - RuNNer.mpi.x  # [mpi != 'nompi']
 
 about:
   home: https://www.uni-goettingen.de/de/560580.html
