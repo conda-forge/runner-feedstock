@@ -1,7 +1,10 @@
 #!/bin/bash
-cd src
-make serial
-make mpi
 mkdir -p ${PREFIX}/bin
+cd src
+
+make serial
 cp RuNNer.serial.x ${PREFIX}/bin
+make clean
+
+make mpi
 cp RuNNer.mpi.x ${PREFIX}/bin
