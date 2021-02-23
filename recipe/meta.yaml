@@ -23,7 +23,7 @@ requirements:
     - make
     - llvm-openmp  # [osx]
     - libgomp      # [linux]
-    - mpifort-{{ mpi }}  # [mpi != 'nompi']
+    - {{ mpi }}-mpifort  # [mpi != 'nompi']
   host:
     - libblas
     - liblapack
