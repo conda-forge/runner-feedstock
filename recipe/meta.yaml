@@ -25,6 +25,7 @@ requirements:
   host:
     - libblas
     - liblapack
+    - {{ mpi }}
   run:
 
 test:
