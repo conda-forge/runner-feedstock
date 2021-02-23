@@ -18,6 +18,8 @@ libblas:
 - 3.8 *netlib
 liblapack:
 - 3.8 *netlib
+mpi:
+- nompi
 target_platform:
 - linux-64
 zip_keys:

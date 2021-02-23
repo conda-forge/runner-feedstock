@@ -9,10 +9,11 @@ source:
   url: https://gitlab.com/TheochemGoettingen/runner-wfas/-/archive/master/runner-wfas-master.tar.gz
   sha256: f4ed373309dd8c8ca3198d24b2a9a26eb9a5841b6dc1233b6eb59366e628dbfb
   patches:
-    - make.patch
+    - mpi.patch  # [mpi != 'nompi']
+    - serial.patch  # [mpi == 'nompi']
 
 build:
-  number: 0
+  number: 1
   skip: ture  # [win]
 
 requirements:
@@ -25,7 +26,9 @@ requirements:
   host:
     - libblas
     - liblapack
+    - {{ mpi }}  # [mpi != 'nompi']
   run:
+    - {{ mpi }}  # [mpi != 'nompi']
 
 test:
   commands:
