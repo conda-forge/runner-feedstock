@@ -4,8 +4,8 @@ Date: Tue, 23 Feb 2021 16:43:33 +0100
 Subject: [PATCH] Update Makefile
 
 ---
- src/Makefile | 10 +++++-----
- 1 file changed, 5 insertions(+), 5 deletions(-)
+ src/Makefile | 12 +++++++-----
+ 1 file changed, 7 insertions(+), 5 deletions(-)
 
 diff --git a/src/Makefile b/src/Makefile
 index 315db85..4fe10c2 100644
@@ -24,6 +24,8 @@ index 315db85..4fe10c2 100644
 -FFLAGS        = -O3
 +# CC = gcc
 +# CFLAGS =
++USE_MPI = yes # leave it out for the serial version
++MPIFC = mpif90 # never tested it, leave it out for the serial version
 +LIB           = ${LDFLAGS} -llapack -lblas
 +# FFLAGS        = -O3
  
