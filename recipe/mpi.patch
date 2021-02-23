@@ -1,6 +1,6 @@
-From 2d0fbf8a5af8e5b1997a672698bfb766dec08b24 Mon Sep 17 00:00:00 2001
+From d69262293240c1763e8fbbbb4a46b270f22b0b04 Mon Sep 17 00:00:00 2001
 From: Jan Janssen <jan-janssen@users.noreply.github.com>
-Date: Tue, 23 Feb 2021 16:43:33 +0100
+Date: Tue, 23 Feb 2021 21:11:03 +0100
 Subject: [PATCH] Update Makefile
 
 ---
@@ -8,15 +8,17 @@ Subject: [PATCH] Update Makefile
  1 file changed, 7 insertions(+), 5 deletions(-)
 
 diff --git a/src/Makefile b/src/Makefile
-index 315db85..4fe10c2 100644
+index 315db85..09c473d 100644
 --- a/src/Makefile
 +++ b/src/Makefile
-@@ -35,12 +35,12 @@
+@@ -35,12 +35,14 @@
  
  ### gfortran/MacOS settings:
  ###-------------------------
 -FC     = gfortran
-+# FC     = gfortran
++#FC     = gfortran
++USE_MPI = yes # leave it out for the serial version
++MPIFC = mpif90 # never tested it, leave it out for the serial version
  USE_C_FILES = yes
 -CC = gcc
 -CFLAGS =
@@ -24,8 +26,6 @@ index 315db85..4fe10c2 100644
 -FFLAGS        = -O3
 +# CC = gcc
 +# CFLAGS =
-+USE_MPI = yes # leave it out for the serial version
-+MPIFC = mpif90 # never tested it, leave it out for the serial version
 +LIB           = ${LDFLAGS} -llapack -lblas
 +# FFLAGS        = -O3
  
