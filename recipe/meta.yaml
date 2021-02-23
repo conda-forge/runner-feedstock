@@ -10,7 +10,6 @@ source:
   sha256: f4ed373309dd8c8ca3198d24b2a9a26eb9a5841b6dc1233b6eb59366e628dbfb
   patches:
     - mpi.patch  # [mpi != 'nompi']
-    - serial.patch  # [mpi == 'nompi']
 
 build:
   number: 2
