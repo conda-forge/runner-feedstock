@@ -12,7 +12,7 @@ source:
     - mpi.patch  # [mpi != 'nompi']
 
 build:
-  number: 2
+  number: 3
   skip: ture  # [win]
 
 requirements:
@@ -39,7 +39,7 @@ about:
   license: GPL-3.0-or-later
   license_family: GPL
   license_file: LICENSE.txt
-  summary: 'Simple, fast, extensible JSON encoder/decoder for Python'
+  summary: 'RuNNer - a Neural Network code for high-dimensional systems'
   description: |
     In order to develop Neural Network potential-energy surfaces for a 
     variety of system, we have developed our in-house NN code for 
