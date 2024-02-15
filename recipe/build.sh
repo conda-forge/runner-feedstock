@@ -3,6 +3,9 @@
 mkdir -p ${PREFIX}/bin
 cd src-devel
 
+# export flags
+export FFLAGS="${FFLAGS} -fallow-argument-mismatch"
+
 # remove other make files
 rm GNUmakefile
 rm Makefile.orig
