@@ -12,7 +12,7 @@ diff --git a/src-devel/Makefile b/src-devel/Makefile
 new file mode 100644
 index 0000000..1a54ba6
 --- /dev/null
-+++ b/src-devel/Makefile
++++ src-devel/Makefile
 @@ -0,0 +1,1373 @@
 +# Makefile for RuNNer
 +
