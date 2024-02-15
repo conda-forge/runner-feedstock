@@ -418,52 +418,52 @@ index 0000000..1a54ba6
 +
 +# compile modules
 +fileunits.o: fileunits.f90
-+	$(FC) $(FFLAGS_MPI) -c fileunits.f90
++	$(FC) $(FFLAGS) -c fileunits.f90
 +
 +fittingoptions.o: fittingoptions.f90
-+	$(FC) $(FFLAGS_MPI) -c fittingoptions.f90
++	$(FC) $(FFLAGS) -c fittingoptions.f90
 +
 +nnflags.o: nnflags.f90
-+	$(FC) $(FFLAGS_MPI) -c nnflags.f90
++	$(FC) $(FFLAGS) -c nnflags.f90
 +
 +nnconstants.o: nnconstants.f90
-+	$(FC) $(FFLAGS_MPI) -c nnconstants.f90
++	$(FC) $(FFLAGS) -c nnconstants.f90
 +
 +globaloptions.o: globaloptions.f90
-+	$(FC) $(FFLAGS_MPI) -c globaloptions.f90
++	$(FC) $(FFLAGS) -c globaloptions.f90
 +
 +inputnncounters.o: inputnncounters.f90
-+	$(FC) $(FFLAGS_MPI) -c inputnncounters.f90
++	$(FC) $(FFLAGS) -c inputnncounters.f90
 +
 +mode1options.o: mode1options.f90
-+	$(FC) $(FFLAGS_MPI) -c mode1options.f90
++	$(FC) $(FFLAGS) -c mode1options.f90
 +
 +nnshort_atomic.o: nnshort_atomic.f90
-+	$(FC) $(FFLAGS_MPI) -c nnshort_atomic.f90
++	$(FC) $(FFLAGS) -c nnshort_atomic.f90
 +
 +nnewald.o: nnewald.f90
-+	$(FC) $(FFLAGS_MPI) -c nnewald.f90
++	$(FC) $(FFLAGS) -c nnewald.f90
 +
 +nnshort_pair.o: nnshort_pair.f90
-+	$(FC) $(FFLAGS_MPI) -c nnshort_pair.f90
++	$(FC) $(FFLAGS) -c nnshort_pair.f90
 +
 +saturation.o: saturation.f90
-+	$(FC) $(FFLAGS_MPI) -c saturation.f90
++	$(FC) $(FFLAGS) -c saturation.f90
 +
 +structures.o: structures.f90
-+	$(FC) $(FFLAGS_MPI) -c structures.f90
++	$(FC) $(FFLAGS) -c structures.f90
 +
 +mpi_module.o: mpi_module.f90
-+	$(MPIFC) $(FFLAGS_MPI) -c mpi_module.f90
++	$(MPIFC) $(FFLAGS) -c mpi_module.f90
 +
 +symfunctions.o: symfunctions.f90
-+	$(FC) $(FFLAGS_MPI) -c symfunctions.f90
++	$(FC) $(FFLAGS) -c symfunctions.f90
 +
 +timings.o: timings.f90
-+	$(FC) $(FFLAGS_MPI) -c timings.f90
++	$(FC) $(FFLAGS) -c timings.f90
 +
 +predictionoptions.o: predictionoptions.f90
-+	$(FC) $(FFLAGS_MPI) -c predictionoptions.f90
++	$(FC) $(FFLAGS) -c predictionoptions.f90
 +
 +# compile MPI modules
 +
@@ -1360,7 +1360,7 @@ index 0000000..1a54ba6
 +
 +mpi: ./RuNNer.mpi.x
 +./RuNNer.mpi.x: $(MODULES_MPI) $(MODULES) $(SUBROUTINES)
-+	$(MPIFC) $(FFLAGS_MPI) -o $@ \
++	$(MPIFC) $(FFLAGS) -o $@ \
 +               $(SUBROUTINES) $(MODULES_MPI) $(MODULES) $(LIB) 
 +
 +scalapack: ./RuNNer.scalapack.x
