@@ -1,0 +1,27 @@
+From 43f1a8e8e69a9fed655947f711b39c75c68f0501 Mon Sep 17 00:00:00 2001
+From: Jan Janssen <jan-janssen@users.noreply.github.com>
+Date: Thu, 15 Feb 2024 16:38:19 +0100
+Subject: [PATCH] Update generalinfo.f90
+
+---
+ src-devel/generalinfo.f90 | 5 -----
+ 1 file changed, 5 deletions(-)
+
+diff --git a/src-devel/generalinfo.f90 b/src-devel/generalinfo.f90
+index 629999b..f3da705 100644
+--- a/src-devel/generalinfo.f90
++++ b/src-devel/generalinfo.f90
+@@ -58,13 +58,8 @@ subroutine generalinfo()
+      !read(time,'(i2,i2,f6.3)')nhours,nminutes,seconds
+      !read(date,'(i4,i2,i2)') year,month,day
+      !directory=getcwd()
+-#ifdef __INTEL_COMPILER
+-      machname=hostnm()
+-      directory=getcwd()
+-#else
+       ierr=hostnm(machname)
+       ierr=getcwd(directory)
+-#endif
+ 
+       call getlog(username)
+       call date_and_time(date,time)

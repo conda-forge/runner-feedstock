@@ -1,33 +1,109 @@
-From d69262293240c1763e8fbbbb4a46b270f22b0b04 Mon Sep 17 00:00:00 2001
+From d2a35f51c87ff25545581da6a7a6e797be3be7b3 Mon Sep 17 00:00:00 2001
 From: Jan Janssen <jan-janssen@users.noreply.github.com>
-Date: Tue, 23 Feb 2021 21:11:03 +0100
-Subject: [PATCH] Update Makefile
+Date: Thu, 15 Feb 2024 16:08:46 +0100
+Subject: [PATCH] Update GNUmakefile
 
 ---
- src/Makefile | 12 +++++++-----
- 1 file changed, 7 insertions(+), 5 deletions(-)
+ src-devel/GNUmakefile | 77 +++----------------------------------------
+ 1 file changed, 4 insertions(+), 73 deletions(-)
 
-diff --git a/src/Makefile b/src/Makefile
-index 315db85..09c473d 100644
---- a/src/Makefile
-+++ b/src/Makefile
-@@ -35,12 +35,14 @@
+diff --git a/src-devel/GNUmakefile b/src-devel/GNUmakefile
+index b4491f8..5fabb61 100644
+--- a/src-devel/GNUmakefile
++++ b/src-devel/GNUmakefile
+@@ -13,9 +13,8 @@
  
- ### gfortran/MacOS settings:
- ###-------------------------
--FC     = gfortran
-+#FC     = gfortran
-+USE_MPI = yes # leave it out for the serial version
-+MPIFC = mpif90 # never tested it, leave it out for the serial version
- USE_C_FILES = yes
--CC = gcc
--CFLAGS =
--LIB           = -L/Users/jbehler/Daten-Goettingen/Codes/LAPACK/lapack-3.8.0 -llapack -lblas
--FFLAGS        = -O3
-+# CC = gcc
-+# CFLAGS =
-+LIB           = ${LDFLAGS} -llapack -lblas -fopenmp
-+# FFLAGS        = -O3
+ # By default the static release version based on MKL will be made using ifort.
+ VARS   = FC DEBUG MKL STATIC ARCH PFUNIT
+-FC     = ifort
+ DEBUG  = OFF
+-MKL    = ON
++MKL    = OFF
+ STATIC = ON
+ OPT		 = -O3
+ # The code will be optimized for the avx2 instruction set. It should be
+@@ -69,81 +68,13 @@ SRCS = $(shell $(FIND) "*$(SRCEXT)")
+ # Object files will be stored in a build directory.
+ OBJS = $(filter-out $(MAIN), $(addprefix $(BLDDIR), $(SRCS:$(SRCEXT)=$(OBJEXT))))
  
- ### GWDG
- ###-----
+-# Compiler flags
+-ifeq ($(FC),ifort)
+-  FCFLAGS = -I$(MODDIR) -module $(MODDIR) -cpp $(OPT) -parallel -qopenmp \
+-            -mtune=core-$(ARCH) -march=core-$(ARCH) -no-fast-transcendentals
+-  LDFLAGS = $(FCFLAGS)
+-  DBFLAGS = -check bounds -g -traceback
+-else ifeq ($(FC),ifx)
+-  FCFLAGS = -I$(MODDIR) -module $(MODDIR) -cpp $(OPT) -qopenmp \
+-            -mtune=core-$(ARCH) -march=core-$(ARCH)
+-  LDFLAGS = $(FCFLAGS)
+-  DBFLAGS = -check bounds -g -traceback
+-	STATIC  = OFF #does currently not work
+-else ifeq ($(FC),gfortran)
+-  ALLOWAM = $(shell $(FC) -fallow-argument-mismatch 2>&1 \
+-            | grep -q 'unrecognized' || echo -fallow-argument-mismatch)
+-  FCFLAGS = -I$(MODDIR) -J$(MODDIR) -cpp $(OPT) -m$(ARCH) -fopenmp -m64 $(ALLOWAM)
+-  LDFLAGS = -O3 -m$(ARCH) -m64
+-  DBFLAGS = -O3 -Wall -Wconversion -g -fbacktrace -fbounds-check
+-else
+-  $(error Unsupported compiler requested!)
+-endif
+-
+-ifeq ($(DEBUG),ON)
+-  FCFLAGS += $(DBFLAGS)
+-  LDFLAGS += $(DBFLAGS)
+-endif
+-
+-# Libraries
+-#
+-# Static linking is introduced by compile flags. It's a feature (some people
+-# might consider it a bug) of gfortran that you have to link the static version
+-# of libquadmath explicitly.
+-ifeq ($(STATIC),ON)
+-  LDFLAGS += -static-libgcc -Wl,-Bstatic
+-  DYNFLAG  = -Wl,-Bdynamic
+-  STATQM   = -l:libquadmath.a
+-  ifeq ($(FC),ifort)
+-    LDFLAGS += -static-intel -qopenmp-link=static
+-  else # FC = gfortran
+-    LDFLAGS += -static-libgfortran
+-    STATGNU  = $(STATQM)
+-  endif
+-endif
+-
+-# Libraries that will always be linked dynamically.
+-# A statically linked glibc would require the same glibc version during runtime.
+-DYN = $(DYNFLAG) -lpthread -lm -ldl -lc
+-
+-# Compiler specific libraries 
+-ifeq ($(FC),ifort)
+-    FCMKL   = -lmkl_intel_lp64 -lmkl_intel_thread
+-else ifeq ($(FC),ifx)
+-    FCMKL   = -lmkl_intel_lp64 -lmkl_intel_thread
+-else # FC = gfortran
+-    FCMKL   = -lmkl_gf_lp64 -lmkl_gnu_thread -lgomp
+-    FCNOMKL = -lgomp
+-endif
+-
+-# Using the variables set above, the LIB variable that will be used for linking 
+-# is set for the MKL and non-MKL case.
+-ifeq ($(MKL),ON)
+-  LDFLAGS := $(LDFLAGS) -L${MKLROOT}/lib/intel64
+-  LIB = -Wl,--start-group -lmkl_blas95_lp64 -lmkl_lapack95_lp64 -Wl,--end-group \
+-        -Wl,--start-group $(FCMKL) -lmkl_core -Wl,--end-group $(DYN) $(STATGNU)
+-else # MKL=OFF
+-  LIB = $(FCNOMKL) -llapack -lblas -lgfortran $(STATQM) $(DYN)
+-endif
+-
+-COMPILE = $(FC) $(FCFLAGS)
++COMPILE = $(FC) $(FFLAGS)
+ LINK    = $(FC) $(LDFLAGS)
+ #$(info Compilation will be done with: $(COMPILE))
+ 
+ # Files to remeber linking options and compile options
+-LINKMEM = $(BLDDIR).link_mkl_$(MKL) $(BLDDIR).link_static_$(STATIC)
+-COMPMEM = $(BLDDIR).comp_FC_$(FC) $(BLDDIR).comp_debug_$(DEBUG)
++LINKMEM = $(BLDDIR).link_mkl_OFF $(BLDDIR).link_static_ON
++COMPMEM = $(BLDDIR).comp_FC_gfortran $(BLDDIR).comp_debug_OFF
+ 
+ # pFunit
+ TESTS = $(patsubst %$(TESTEXT),%$(PRGRMEXT),$(shell $(FIND) "*$(TESTEXT)"))
