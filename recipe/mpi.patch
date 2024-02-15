@@ -1,14 +1,14 @@
-From e2b88654f788422a10f47f76224832cd6f142b13 Mon Sep 17 00:00:00 2001
+From d2a35f51c87ff25545581da6a7a6e797be3be7b3 Mon Sep 17 00:00:00 2001
 From: Jan Janssen <jan-janssen@users.noreply.github.com>
-Date: Thu, 15 Feb 2024 16:06:05 +0100
+Date: Thu, 15 Feb 2024 16:08:46 +0100
 Subject: [PATCH] Update GNUmakefile
 
 ---
- src-devel/GNUmakefile | 75 ++-----------------------------------------
- 1 file changed, 3 insertions(+), 72 deletions(-)
+ src-devel/GNUmakefile | 77 +++----------------------------------------
+ 1 file changed, 4 insertions(+), 73 deletions(-)
 
 diff --git a/src-devel/GNUmakefile b/src-devel/GNUmakefile
-index b4491f8..397b1b4 100644
+index b4491f8..5fabb61 100644
 --- a/src-devel/GNUmakefile
 +++ b/src-devel/GNUmakefile
 @@ -13,9 +13,8 @@
@@ -94,15 +94,16 @@ index b4491f8..397b1b4 100644
 -  LIB = $(FCNOMKL) -llapack -lblas -lgfortran $(STATQM) $(DYN)
 -endif
 -
- COMPILE = $(FC) $(FCFLAGS)
+-COMPILE = $(FC) $(FCFLAGS)
++COMPILE = $(FC) $(FFLAGS)
  LINK    = $(FC) $(LDFLAGS)
  #$(info Compilation will be done with: $(COMPILE))
  
  # Files to remeber linking options and compile options
 -LINKMEM = $(BLDDIR).link_mkl_$(MKL) $(BLDDIR).link_static_$(STATIC)
 -COMPMEM = $(BLDDIR).comp_FC_$(FC) $(BLDDIR).comp_debug_$(DEBUG)
-+LINKMEM = $(BLDDIR).link_mkl_no $(BLDDIR).link_static_yes
-+COMPMEM = $(BLDDIR).comp_FC_gfortran $(BLDDIR).comp_debug_no
++LINKMEM = $(BLDDIR).link_mkl_OFF $(BLDDIR).link_static_ON
++COMPMEM = $(BLDDIR).comp_FC_gfortran $(BLDDIR).comp_debug_OFF
  
  # pFunit
  TESTS = $(patsubst %$(TESTEXT),%$(PRGRMEXT),$(shell $(FIND) "*$(TESTEXT)"))
