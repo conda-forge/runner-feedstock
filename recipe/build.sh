@@ -1,6 +1,6 @@
 #!/bin/bash
 mkdir -p ${PREFIX}/bin
-cd src
+cd src-devel
 
 make serial
 cp RuNNer.serial.x ${PREFIX}/bin
