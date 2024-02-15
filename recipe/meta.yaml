@@ -26,9 +26,7 @@ requirements:
     - {{ mpi }}-mpifort  # [mpi != 'nompi']
   host:
     - libblas
-    - libcblas
     - liblapack
-    - liblapacke
     - {{ mpi }}  # [mpi != 'nompi']
   run:
     - {{ mpi }}  # [mpi != 'nompi']
