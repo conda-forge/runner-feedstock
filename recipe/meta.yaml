@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://gitlab.com/runner-suite/runner-conda/-/archive/{{ version }}/runner-conda-{{ version }}.tar.gz
-  sha256: f4ed373309dd8c8ca3198d24b2a9a26eb9a5841b6dc1233b6eb59366e628dbfb
+  sha256: 69965dcfde64530b7a75708c25e6243363e0a5745e66ac458a1e7086592538a2
   patches:
     - mpi.patch  # [mpi != 'nompi']
 
