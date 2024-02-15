@@ -1,25 +1,28 @@
-From e2f3415ad56095cec77e3e4c79b102fc9f297787 Mon Sep 17 00:00:00 2001
+From 1f2cef6cc87cd04084b19f7baf58fad81b8e9438 Mon Sep 17 00:00:00 2001
 From: Jan Janssen <jan-janssen@users.noreply.github.com>
-Date: Thu, 15 Feb 2024 15:07:03 +0100
+Date: Thu, 15 Feb 2024 15:46:06 +0100
 Subject: [PATCH] Update GNUmakefile
 
 ---
- src-devel/GNUmakefile | 28 ----------------------------
- 1 file changed, 28 deletions(-)
+ src-devel/GNUmakefile | 71 +------------------------------------------
+ 1 file changed, 1 insertion(+), 70 deletions(-)
 
 diff --git a/src-devel/GNUmakefile b/src-devel/GNUmakefile
-index b4491f8..7da4c2d 100644
+index b4491f8..a23e2ca 100644
 --- a/src-devel/GNUmakefile
 +++ b/src-devel/GNUmakefile
-@@ -13,7 +13,6 @@
+@@ -13,9 +13,8 @@
  
  # By default the static release version based on MKL will be made using ifort.
  VARS   = FC DEBUG MKL STATIC ARCH PFUNIT
 -FC     = ifort
  DEBUG  = OFF
- MKL    = ON
+-MKL    = ON
++MKL    = OFF
  STATIC = ON
-@@ -69,33 +68,6 @@ SRCS = $(shell $(FIND) "*$(SRCEXT)")
+ OPT		 = -O3
+ # The code will be optimized for the avx2 instruction set. It should be
+@@ -69,74 +68,6 @@ SRCS = $(shell $(FIND) "*$(SRCEXT)")
  # Object files will be stored in a build directory.
  OBJS = $(filter-out $(MAIN), $(addprefix $(BLDDIR), $(SRCS:$(SRCEXT)=$(OBJEXT))))
  
@@ -50,6 +53,47 @@ index b4491f8..7da4c2d 100644
 -  LDFLAGS += $(DBFLAGS)
 -endif
 -
- # Libraries
- #
- # Static linking is introduced by compile flags. It's a feature (some people
+-# Libraries
+-#
+-# Static linking is introduced by compile flags. It's a feature (some people
+-# might consider it a bug) of gfortran that you have to link the static version
+-# of libquadmath explicitly.
+-ifeq ($(STATIC),ON)
+-  LDFLAGS += -static-libgcc -Wl,-Bstatic
+-  DYNFLAG  = -Wl,-Bdynamic
+-  STATQM   = -l:libquadmath.a
+-  ifeq ($(FC),ifort)
+-    LDFLAGS += -static-intel -qopenmp-link=static
+-  else # FC = gfortran
+-    LDFLAGS += -static-libgfortran
+-    STATGNU  = $(STATQM)
+-  endif
+-endif
+-
+-# Libraries that will always be linked dynamically.
+-# A statically linked glibc would require the same glibc version during runtime.
+-DYN = $(DYNFLAG) -lpthread -lm -ldl -lc
+-
+-# Compiler specific libraries 
+-ifeq ($(FC),ifort)
+-    FCMKL   = -lmkl_intel_lp64 -lmkl_intel_thread
+-else ifeq ($(FC),ifx)
+-    FCMKL   = -lmkl_intel_lp64 -lmkl_intel_thread
+-else # FC = gfortran
+-    FCMKL   = -lmkl_gf_lp64 -lmkl_gnu_thread -lgomp
+-    FCNOMKL = -lgomp
+-endif
+-
+-# Using the variables set above, the LIB variable that will be used for linking 
+-# is set for the MKL and non-MKL case.
+-ifeq ($(MKL),ON)
+-  LDFLAGS := $(LDFLAGS) -L${MKLROOT}/lib/intel64
+-  LIB = -Wl,--start-group -lmkl_blas95_lp64 -lmkl_lapack95_lp64 -Wl,--end-group \
+-        -Wl,--start-group $(FCMKL) -lmkl_core -Wl,--end-group $(DYN) $(STATGNU)
+-else # MKL=OFF
+-  LIB = $(FCNOMKL) -llapack -lblas -lgfortran $(STATQM) $(DYN)
+-endif
+-
+ COMPILE = $(FC) $(FCFLAGS)
+ LINK    = $(FC) $(LDFLAGS)
+ #$(info Compilation will be done with: $(COMPILE))
