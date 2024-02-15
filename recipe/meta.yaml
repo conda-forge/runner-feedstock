@@ -1,12 +1,12 @@
 {% set name = "runner" %}
-{% set version = "1.2" %}
+{% set version = "1.3" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  url: https://gitlab.com/TheochemGoettingen/runner-wfas/-/archive/master/runner-wfas-master.tar.gz
+  url: https://gitlab.com/runner-suite/runner-conda/-/archive/{{ version }}/runner-conda-{{ version }}.tar.gz
   sha256: f4ed373309dd8c8ca3198d24b2a9a26eb9a5841b6dc1233b6eb59366e628dbfb
   patches:
     - mpi.patch  # [mpi != 'nompi']
