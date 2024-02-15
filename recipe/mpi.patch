@@ -222,10 +222,10 @@ index 0000000..1a54ba6
 +	getfilenames_elec.o \
 +	getfilenamespair.o \
 +	getfixedweights.o \
-+        getforces.o \
++ getforces.o \
 +	getforcescaling.o \
-+        getforcestatistics.o \
-+        getglobalscaling.o \
++ getforcestatistics.o \
++ getglobalscaling.o \
 +	getidx.o \
 +	getkaldims.o \
 +	getkaldims_elec.o \
@@ -261,7 +261,7 @@ index 0000000..1a54ba6
 +	getshortenergies_parapair.o \
 +	getshortforces.o \
 +	getshortforcespair.o \
-+        getshortforces_parapair.o\
++ getshortforces_parapair.o\
 +	getstructure_mode3.o \
 +	getstructures.o \
 +	getstructures_mixed.o \
@@ -347,7 +347,7 @@ index 0000000..1a54ba6
 +	scalesymone.o \
 +	scalesympair.o \
 +	scalesym_para.o \
-+        scalesympair_para.o\
++ scalesympair_para.o\
 +	scalesymfit_para.o \
 +	scalesymfit_parapair.o \
 +	setglobalactivation.o \
