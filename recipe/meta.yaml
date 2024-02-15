@@ -10,6 +10,7 @@ source:
   sha256: 69965dcfde64530b7a75708c25e6243363e0a5745e66ac458a1e7086592538a2
   patches:
     - mpi.patch  # [mpi != 'nompi']
+    - gnu.patch
 
 build:
   number: 3
