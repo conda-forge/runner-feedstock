@@ -1,14 +1,14 @@
-From 1f2cef6cc87cd04084b19f7baf58fad81b8e9438 Mon Sep 17 00:00:00 2001
+From e2b88654f788422a10f47f76224832cd6f142b13 Mon Sep 17 00:00:00 2001
 From: Jan Janssen <jan-janssen@users.noreply.github.com>
-Date: Thu, 15 Feb 2024 15:46:06 +0100
+Date: Thu, 15 Feb 2024 16:06:05 +0100
 Subject: [PATCH] Update GNUmakefile
 
 ---
- src-devel/GNUmakefile | 71 +------------------------------------------
- 1 file changed, 1 insertion(+), 70 deletions(-)
+ src-devel/GNUmakefile | 75 ++-----------------------------------------
+ 1 file changed, 3 insertions(+), 72 deletions(-)
 
 diff --git a/src-devel/GNUmakefile b/src-devel/GNUmakefile
-index b4491f8..a23e2ca 100644
+index b4491f8..397b1b4 100644
 --- a/src-devel/GNUmakefile
 +++ b/src-devel/GNUmakefile
 @@ -13,9 +13,8 @@
@@ -22,7 +22,7 @@ index b4491f8..a23e2ca 100644
  STATIC = ON
  OPT		 = -O3
  # The code will be optimized for the avx2 instruction set. It should be
-@@ -69,74 +68,6 @@ SRCS = $(shell $(FIND) "*$(SRCEXT)")
+@@ -69,81 +68,13 @@ SRCS = $(shell $(FIND) "*$(SRCEXT)")
  # Object files will be stored in a build directory.
  OBJS = $(filter-out $(MAIN), $(addprefix $(BLDDIR), $(SRCS:$(SRCEXT)=$(OBJEXT))))
  
@@ -97,3 +97,12 @@ index b4491f8..a23e2ca 100644
  COMPILE = $(FC) $(FCFLAGS)
  LINK    = $(FC) $(LDFLAGS)
  #$(info Compilation will be done with: $(COMPILE))
+ 
+ # Files to remeber linking options and compile options
+-LINKMEM = $(BLDDIR).link_mkl_$(MKL) $(BLDDIR).link_static_$(STATIC)
+-COMPMEM = $(BLDDIR).comp_FC_$(FC) $(BLDDIR).comp_debug_$(DEBUG)
++LINKMEM = $(BLDDIR).link_mkl_no $(BLDDIR).link_static_yes
++COMPMEM = $(BLDDIR).comp_FC_gfortran $(BLDDIR).comp_debug_no
+ 
+ # pFunit
+ TESTS = $(patsubst %$(TESTEXT),%$(PRGRMEXT),$(shell $(FIND) "*$(TESTEXT)"))
