@@ -7,10 +7,10 @@ cd src-devel
 export FFLAGS="${FFLAGS} -fallow-argument-mismatch"
 
 # serial version
-make PROGRAM=RuNNer.serial.x
+make DEBUG=OFF MKL=OFF PROGRAM=RuNNer.serial.x
 cp RuNNer.serial.x ${PREFIX}/bin
 make clean
 
 # mpi parallel version
-make PROGRAM=RuNNer.mpi.x
+make DEBUG=OFF MKL=OFF PROGRAM=RuNNer.mpi.x
 cp RuNNer.mpi.x ${PREFIX}/bin
