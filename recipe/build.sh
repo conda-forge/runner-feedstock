@@ -5,7 +5,7 @@ cd src-devel
 
 # export flags
 export FFLAGS="${FFLAGS} -fallow-argument-mismatch"
-export LDFLAGS="${LDFLAGS} -llapack -lblas -lcblas -fopenmp"
+export LIB="${LDFLAGS} -llapack -lblas -fopenmp"
 
 # serial version
 make FC=${FC} DEBUG=OFF MKL=OFF PROGRAM=RuNNer.serial.x
