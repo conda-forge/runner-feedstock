@@ -3,7 +3,7 @@
 
 package:
   name: {{ name|lower }}
-  version: {{ version }}
+  version: "{{ version }}"
 
 source:
   url: https://gitlab.com/runner-suite/runner-conda/-/archive/{{ version }}/runner-conda-{{ version }}.tar.gz
@@ -13,7 +13,7 @@ source:
     - gnu.patch
 
 build:
-  number: 5
+  number: 6
   skip: ture  # [win]
 
 requirements:
@@ -53,5 +53,8 @@ about:
 
 extra:
   recipe-maintainers:
+    - Theochem2RUB
+    - gunnar1987
     - lxknll
+    - M0M097
     - jan-janssen

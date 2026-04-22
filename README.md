@@ -194,6 +194,9 @@ In order to produce a uniquely identifiable distribution:
 Feedstock Maintainers
 =====================
 
+* [@M0M097](https://github.com/M0M097/)
+* [@Theochem2RUB](https://github.com/Theochem2RUB/)
+* [@gunnar1987](https://github.com/gunnar1987/)
 * [@jan-janssen](https://github.com/jan-janssen/)
 * [@lxknll](https://github.com/lxknll/)
 
