@@ -27,7 +27,7 @@ liblapack:
 openmpi:
 - '5'
 runner_variant:
-- gnu
+- gnu_omp
 target_platform:
 - linux-64
 with_mpi:

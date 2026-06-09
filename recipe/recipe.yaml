@@ -24,13 +24,13 @@ requirements:
     - cmake
     - make
     - m4
+    - ${{ stdlib('c') }}
     - if: is_intel
       then:
         - ifx_linux-64
         - dpcpp_linux-64
       else:
         - ${{ compiler('c') }}
-        - ${{ stdlib('c') }}
         - ${{ compiler('fortran') }}
 
   host:
@@ -112,7 +112,7 @@ about:
 
     Three build variants are provided under the single package name ``runner``:
 
-    gnu
+    gnu_omp
       GCC/gfortran, OpenBLAS, serial only.  Linux and macOS.
 
     gnu_mpi
@@ -123,7 +123,7 @@ about:
 
     Select a specific variant with a build-string glob, e.g.::
 
-      conda install "runner=*=gnu_*"   # GNU serial
+      conda install "runner=*=gnu_omp_*"   # GNU serial
       conda install "runner=*=gnu_mpi_*"   # GNU parallel
       conda install "runner=*=intel_*"   # Intel serial
 
