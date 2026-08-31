@@ -2,20 +2,20 @@ schema_version: 1
 
 context:
   name: runner
-  version: "2.0.0_20260512"
+  version: "2.0.5_20260820"
 
 package:
   name: "runner"
   version: ${{ version }}
 
 # Obtain the checksum using
-# curl -sL https://gitlab.com/runner-suite/runner2/-/archive/v{{ version }}/runner2-v{{ version }}.tar.gz | sha256sum
+# curl -sL https://gitlab.com/runner-suite/runner2/-/archive/{{ version }}/runner2-{{ version }}.tar.gz | sha256sum
 source:
   url: https://gitlab.com/runner-suite/runner2/-/archive/${{ version }}/runner2-${{ version }}.tar.gz
-  sha256: c362553ae2aaaac7acea89ae2d3cf5a210fc0992943a9b39ad43d27208e420df
+  sha256: 5ac9badfff4fabc4388b8448d3c06ac1f2f9f4767551ab7f9bb5b94d6fb85f2c
 
 build:
-  number: 1
+  number: 0
   string: "${{ runner_variant }}_h${{ hash }}_${{ build_number }}"
   skip: not (linux or osx) or (is_intel and osx)
 
