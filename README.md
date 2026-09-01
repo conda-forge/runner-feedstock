@@ -19,10 +19,10 @@ at Ruhr Universität Bochum, Germany.
 
 Three build variants are provided under the single package name ``runner``:
 
-gnu
+gnu_omp
   GCC/gfortran, OpenBLAS, serial only.  Linux and macOS.
 
-gnu_mpi
+gnu_mpi_omp
   GCC/gfortran, OpenBLAS, OpenMPI parallel build.  Linux and macOS.
 
 intel
@@ -30,8 +30,8 @@ intel
 
 Select a specific variant with a build-string glob, e.g.::
 
-  conda install "runner=*=gnu_*"   # GNU serial
-  conda install "runner=*=gnu_mpi_*"   # GNU parallel
+  conda install "runner=*=gnu_omp_*"   # GNU serial
+  conda install "runner=*=gnu_mpi_omp_*"   # GNU parallel
   conda install "runner=*=intel_*"   # Intel serial
 
 A parallel Intel variant is not provided.
@@ -61,17 +61,17 @@ Current build status
         <table>
           <thead><tr><th>Variant</th><th>Status</th></tr></thead>
           <tbody><tr>
-              <td>osx_64_is_intelfalserunner_variantgnu_mpiwith_mpitrue</td>
+              <td>osx_64_is_intelfalserunner_variantgnu_mpi_ompwith_mpitrue</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=12016&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/runner-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_64_is_intelfalserunner_variantgnu_mpiwith_mpitrue" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/runner-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_64_is_intelfalserunner_variantgnu_mpi_ompwith_mpitrue" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>osx_64_is_intelfalserunner_variantgnuwith_mpifalse</td>
+              <td>osx_64_is_intelfalserunner_variantgnu_ompwith_mpifalse</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=12016&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/runner-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_64_is_intelfalserunner_variantgnuwith_mpifalse" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/runner-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_64_is_intelfalserunner_variantgnu_ompwith_mpifalse" alt="variant">
                 </a>
               </td>
             </tr>
@@ -99,31 +99,73 @@ conda config --add channels conda-forge
 conda config --set channel_priority strict
 ```
 
-Once the `conda-forge` channel has been enabled, `runner` can be installed with `conda`:
+How to use
+----------
+
+<details>
+<summary>With conda</summary>
 
 ```
 conda install runner
 ```
 
-or with `mamba`:
+</details>
+
+<details>
+<summary>With mamba</summary>
 
 ```
 mamba install runner
 ```
 
-It is possible to list all of the versions of `runner` available on your platform with `conda`:
+</details>
+
+<details>
+<summary>With pixi</summary>
+
+```
+# for adding to your local project
+pixi add runner
+# for installing globally
+pixi global install runner
+```
+
+</details>
+
+Search package versions
+-----------------------
+
+It is possible to list all of the versions of `runner` available on your platform:
+
+<details>
+<summary>With conda</summary>
 
 ```
 conda search runner --channel conda-forge
 ```
 
-or with `mamba`:
+</details>
+
+<details>
+<summary>With mamba</summary>
 
 ```
 mamba search runner --channel conda-forge
 ```
 
-Alternatively, `mamba repoquery` may provide more information:
+</details>
+
+<details>
+<summary>With pixi</summary>
+
+```
+pixi search runner --channel conda-forge
+```
+
+</details>
+
+<details>
+<summary>With mamba repoquery, which may provide more information</summary>
 
 ```
 # Search all versions available on your platform:
@@ -135,6 +177,8 @@ mamba repoquery whoneeds runner --channel conda-forge
 # List dependencies of `runner`:
 mamba repoquery depends runner --channel conda-forge
 ```
+
+</details>
 
 
 About conda-forge
@@ -208,4 +252,5 @@ Feedstock Maintainers
 * [@gunnar1987](https://github.com/gunnar1987/)
 * [@jan-janssen](https://github.com/jan-janssen/)
 * [@lxknll](https://github.com/lxknll/)
+* [@mirajkovic](https://github.com/mirajkovic/)
 
