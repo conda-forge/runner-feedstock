@@ -2,7 +2,7 @@ schema_version: 1
 
 context:
   name: runner
-  version: "2.0.5_20260820"
+  version: "2.0.6_20261020"
 
 package:
   name: "runner"
@@ -12,7 +12,7 @@ package:
 # curl -sL https://gitlab.com/runner-suite/runner2/-/archive/{{ version }}/runner2-{{ version }}.tar.gz | sha256sum
 source:
   url: https://gitlab.com/runner-suite/runner2/-/archive/${{ version }}/runner2-${{ version }}.tar.gz
-  sha256: 5ac9badfff4fabc4388b8448d3c06ac1f2f9f4767551ab7f9bb5b94d6fb85f2c
+  sha256: d16986ab5cdf148b3e29f00ef108525882f5db05dbe78c423d91f30a15d40553
 
 build:
   number: 0
