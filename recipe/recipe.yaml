@@ -27,8 +27,8 @@ requirements:
     - ${{ stdlib('c') }}
     - if: is_intel
       then:
-        - ifx_linux-64
-        - dpcpp_linux-64
+        - ifx_linux-64 ==2026.1.1
+        - dpcpp_linux-64 ==2026.1.1
       else:
         - ${{ compiler('c') }}
         - ${{ compiler('fortran') }}
