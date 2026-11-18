@@ -2,7 +2,7 @@ schema_version: 1
 
 context:
   name: runner
-  version: "2.0.6_20261020"
+  version: "2.0.7_20261117"
 
 package:
   name: "runner"
@@ -12,7 +12,7 @@ package:
 # curl -sL https://gitlab.com/runner-suite/runner2/-/archive/{{ version }}/runner2-{{ version }}.tar.gz | sha256sum
 source:
   url: https://gitlab.com/runner-suite/runner2/-/archive/${{ version }}/runner2-${{ version }}.tar.gz
-  sha256: d16986ab5cdf148b3e29f00ef108525882f5db05dbe78c423d91f30a15d40553
+  sha256: ea9295ecd5bb634b7ac030572537a1e69f4a69c5e8e0fd05e6ddc043a04427b7
 
 build:
   number: 0
@@ -27,8 +27,8 @@ requirements:
     - ${{ stdlib('c') }}
     - if: is_intel
       then:
-        - ifx_linux-64
-        - dpcpp_linux-64
+        - ifx_linux-64 ==2026.1.1
+        - dpcpp_linux-64 ==2026.1.1
       else:
         - ${{ compiler('c') }}
         - ${{ compiler('fortran') }}
